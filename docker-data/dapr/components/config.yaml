@@ -1,0 +1,20 @@
+apiVersion: dapr.io/v1alpha1
+kind: Configuration
+metadata:
+  name: daprConfig
+spec:
+  mtls:
+    enabled: true
+    allowedClockSkew: 15m
+    workloadCertTTL: 24h
+  tracing:
+    samplingRate: "1"
+    zipkin:
+      endpointAddress: http://localhost:8084/api/v2/spans
+  metrics:
+    enabled: true
+  logging:
+    apiLogging:
+      enabled: true
+      obfuscateURLs: false
+      omitHealthChecks: false

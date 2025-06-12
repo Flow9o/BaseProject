@@ -1,0 +1,47 @@
+<div class="vw-100 bg-dark text-white vh-100">
+  <navbar></navbar>
+  <div class="container py-4">
+    <h2>Benutzer</h2>
+    @if (allUsers().length > 0) {
+      <ul class="list-group mb-4">
+        @for (user of allUsers(); track user.id) {
+          <li class="list-group-item bg-secondary text-white">{{ user | json }}</li>
+        }
+      </ul>
+    } @else {
+      <p>Keine Benutzer vorhanden.</p>
+    }
+
+    <h2>Lesezeichen</h2>
+    @if (allBookmarks().length > 0) {
+      <ul class="list-group mb-4">
+        @for (bookmark of allBookmarks(); track bookmark.id) {
+          <li class="list-group-item bg-secondary text-white">{{ bookmark | json }}</li>
+        }
+      </ul>
+    } @else {
+      <p>Keine Lesezeichen vorhanden.</p>
+    }
+
+    <h2>Aktionen</h2>
+    <div class="mb-4">
+      <button class="btn btn-primary me-2" (click)="createUser()">Benutzer erstellen</button>
+      <button class="btn btn-success" (click)="createBookmark()">Lesezeichen erstellen</button>
+    </div>
+
+    <h2>Lesezeichen einem Benutzer zuweisen</h2>
+    <form [formGroup]="assignBookmarkToUserForm" (ngSubmit)="assignBookmarkToUser()" class="bg-secondary p-4 rounded">
+      <div class="mb-3">
+        <label for="userId" class="form-label">Benutzer-ID:</label>
+        <input id="userId" formControlName="userId" type="number" class="form-control" required>
+      </div>
+
+      <div class="mb-3">
+        <label for="bookmarkId" class="form-label">Lesezeichen-ID:</label>
+        <input id="bookmarkId" formControlName="bookmarkId" type="number" class="form-control" required>
+      </div>
+
+      <button type="submit" class="btn btn-warning" [disabled]="assignBookmarkToUserForm.invalid">Zuweisen</button>
+    </form>
+  </div>
+</div>

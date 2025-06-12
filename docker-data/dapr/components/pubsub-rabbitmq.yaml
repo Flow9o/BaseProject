@@ -1,0 +1,28 @@
+# https://docs.dapr.io/reference/components-reference/supported-pubsub/setup-rabbitmq/
+
+apiVersion: dapr.io/v1alpha1
+kind: Component
+metadata:
+  name: pubsub-rabbitmq
+spec:
+  type: pubsub.rabbitmq
+  version: v1
+  metadata:
+    - name: connectionString
+      value: "amqp://rabbitmq:5672"
+    - name: protocol
+      value: amqp  
+    - name: hostname
+      value: rabbitmq 
+    - name: username
+      value: admin
+    - name: password
+      secretKeyRef:
+        name: rabbitmq
+        key:  password
+    - name: consumerID
+      value: dapr-pubsub
+    - name: enableDeadLetter
+      value: "true"
+auth:
+  secretStore: secretstore-local

@@ -1,0 +1,13 @@
+name: baseprojectlocalservices
+
+include:
+  - ./docker-compose.addon.yml
+  - ./docker-compose.services.yml
+  - ./docker-compose.dapr.yml
+
+services:
+  baseproject.api:
+    image: ${DOCKER_REGISTRY-}baseprojectapi
+    build:
+      context: .
+      dockerfile: ./BaseProject.API/Dockerfile

@@ -1,0 +1,69 @@
+name: baseprojectlocalservices
+
+services:
+
+  # --< dapr >---------------------------------------------------------------------------------------------------------
+  dapr-placement:
+    image: daprio/dapr:${DAPR_ImageVersion}
+    container_name: dapr-placement
+    hostname: dapr-placement
+    domainname: local.baseproject.eu
+    restart: unless-stopped
+    command: ["./placement", "--port", "50005", "--log-level", "debug", "--sentry-address", "dapr-sentry:443", "--trust-domain", "local.baseproject.eu"]
+    volumes:
+      - ./docker-data/dapr/components:/components
+    ports:
+      - 50005:50005
+      - 58080:8080
+      - 58201:8201
+      - 59090:9090
+    depends_on:
+      portainer:
+        condition: service_started
+
+  dapr-scheduler:
+    image: daprio/dapr:${DAPR_ImageVersion}
+    container_name: dapr-scheduler
+    hostname: dapr-scheduler
+    domainname: local.baseproject.eu
+    restart: unless-stopped
+    command: ["./scheduler", "--port", "50006", "--etcd-data-dir=/var/lock/dapr/scheduler"]
+    volumes:
+      - ./docker-data/dapr/components:/components
+    ports:
+      - 50006:50006
+      - 58081:8080
+      - 59091:9090
+      - 52379:2379
+    depends_on:
+      dapr-placement:
+        condition: service_started
+
+  #dapr-sentry:
+  #  image: daprio/dapr:${DAPR_ImageVersion}
+  #  container_name: dapr-sentry
+  #  hostname: dapr-sentry
+  #  domainname: local.baseproject.eu
+  #  restart: unless-stopped
+  #  command: ["./sentry", "--port", "50007", "--config", "/components/config.yaml", "--trust-domain", "local.baseproject.eu"]
+  #  volumes:
+  #    - ./docker-data/dapr/components:/components
+  #  ports:
+  #    - 50001:50001
+  #    - 58082:8080
+  #    - 59092:9090
+  #  depends_on:
+  #    dapr-placement:
+  #      condition: service_started
+
+  dapr-dashboard:
+    image: daprio/dashboard:${DAPR_DB_ImageVersion}
+    container_name: dapr-dashboard
+    hostname: dapr-dashboard
+    domainname: local.baseproject.eu
+    restart: unless-stopped
+    ports:
+      - 8185:8080
+    depends_on:
+      dapr-placement:
+        condition: service_started

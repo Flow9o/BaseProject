@@ -1,0 +1,54 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net9.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <WarningsAsErrors>nullable</WarningsAsErrors>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
+    <DockerComposeProjectPath>..\docker-compose.dcproj</DockerComposeProjectPath>
+    <UserSecretsId>47b79314-515e-4b8d-a724-01a4e3e179d9</UserSecretsId>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="9.0.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Http.Abstractions" Version="2.2.0" />
+    <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="9.0.0" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="9.0.0" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="9.0.0">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="9.0.0">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.21.0" />
+    <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="9.0.2" />
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="7.2.0" />
+    <PackageReference Include="Swashbuckle.AspNetCore.Annotations" Version="7.2.0" />
+    <PackageReference Include="Swashbuckle.AspNetCore.Swagger" Version="7.2.0" />
+    <PackageReference Include="Swashbuckle.AspNetCore.SwaggerGen" Version="7.2.0" />
+    <PackageReference Include="Swashbuckle.AspNetCore.SwaggerUI" Version="7.2.0" />
+    <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="8.3.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\BaseProject.Infrastructure\BaseProject.Infrastructure.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <_ContentIncludedByDefault Remove="BaseProject.API\src\obj\BaseProject.API.csproj.nuget.dgspec.json" />
+    <_ContentIncludedByDefault Remove="BaseProject.API\src\obj\project.assets.json" />
+    <_ContentIncludedByDefault Remove="BaseProject.API\src\obj\project.packagespec.json" />
+    <_ContentIncludedByDefault Remove="BaseProject.API\tests\obj\project.assets.json" />
+    <_ContentIncludedByDefault Remove="BaseProject.API\tests\obj\project.packagespec.json" />
+    <_ContentIncludedByDefault Remove="BaseProject.API\tests\obj\tests.csproj.nuget.dgspec.json" />
+    <_ContentIncludedByDefault Remove="Tests\BaseProject.API.Tests\bin\Debug\net9.0\BaseProject.API.Tests.deps.json" />
+    <_ContentIncludedByDefault Remove="Tests\BaseProject.API.Tests\bin\Debug\net9.0\BaseProject.API.Tests.runtimeconfig.json" />
+    <_ContentIncludedByDefault Remove="Tests\BaseProject.API.Tests\obj\BaseProject.API.Tests.csproj.nuget.dgspec.json" />
+    <_ContentIncludedByDefault Remove="Tests\BaseProject.API.Tests\obj\project.assets.json" />
+    <_ContentIncludedByDefault Remove="Tests\BaseProject.API.Tests\obj\project.packagespec.json" />
+  </ItemGroup>
+
+</Project>

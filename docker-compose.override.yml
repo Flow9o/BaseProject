@@ -1,0 +1,103 @@
+name: baseprojectlocalservices
+
+services:
+  baseproject.api:
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_HTTP_PORTS=8080
+    ports:
+      - "8080"
+
+  # --< portainer >----------------------------------------------------------------------------------------------------
+  portainer:
+    networks:
+      baseproject-local-network:
+        aliases:
+          - portainer
+        ipv4_address: 192.168.111.11
+
+  # --< redis + redisinsight >-----------------------------------------------------------------------------------------
+  redis:
+    networks:
+      baseproject-local-network:
+        aliases:
+          - redis
+        ipv4_address: 192.168.111.21
+
+  redisinsight:
+    networks:
+      baseproject-local-network:
+        aliases:
+          - redisinsight
+        ipv4_address: 192.168.111.22
+
+  # --< postgres + pgadmin >-------------------------------------------------------------------------------------------
+  postgres:
+    networks:
+      baseproject-local-network:
+        aliases:
+          - postgres
+        ipv4_address: 192.168.111.31
+
+  postgresbackup:
+    networks:
+      baseproject-local-network:
+        aliases:
+          - postgresbackup
+        ipv4_address: 192.168.111.32
+
+  pgadmin:
+    networks:
+      baseproject-local-network:
+        aliases:
+          - pgadmin
+        ipv4_address: 192.168.111.33
+
+  # --< rabbitmq >-----------------------------------------------------------------------------------------------------
+  rabbitmq:
+    networks:
+      baseproject-local-network:
+        aliases:
+          - rabbitmq
+        ipv4_address: 192.168.111.41
+
+  # --< zipkin >-------------------------------------------------------------------------------------------------------
+  zipkin:
+    networks:
+      baseproject-local-network:
+        aliases:
+          - zipkin
+        ipv4_address: 192.168.111.51
+
+  # --< dapr >---------------------------------------------------------------------------------------------------------
+  dapr-placement:
+    networks:
+      baseproject-local-network:
+        aliases:
+          - dapr-placement
+          - placement
+        ipv4_address: 192.168.111.61
+
+  dapr-scheduler:
+    networks:
+      baseproject-local-network:
+        aliases:
+          - dapr-scheduler
+          - scheduler
+        ipv4_address: 192.168.111.62
+
+  #dapr-sentry:
+  #  networks:
+  #    baseproject-local-network:
+  #      aliases:
+  #        - dapr-sentry
+  #        - sentry
+  #      ipv4_address: 192.168.111.63
+
+  dapr-dashboard:
+    networks:
+      baseproject-local-network:
+        aliases:
+          - dapr-dashboard
+          - dashboard
+        ipv4_address: 192.168.111.64

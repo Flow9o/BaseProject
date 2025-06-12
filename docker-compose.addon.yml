@@ -1,0 +1,17 @@
+name: baseprojectlocalservices
+
+volumes:
+  portainer_data:
+  pgadmin_data:
+  postgres_data:
+  redis_data:
+  redisinsight_data:
+  dapr_certs:
+
+networks:
+  baseproject-local-network:
+    name: baseproject-local-network
+    ipam:
+      driver: default
+      config:
+        - subnet: "192.168.111.0/24"
