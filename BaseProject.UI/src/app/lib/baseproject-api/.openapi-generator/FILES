@@ -5,12 +5,14 @@ api.base.service.ts
 api.module.ts
 api/api.ts
 api/bookmark-generated.service.ts
+api/car-generated.service.ts
 api/user-generated.service.ts
 configuration.ts
 encoder.ts
 git_push.sh
 index.ts
 model/bookmark.ts
+model/car.ts
 model/models.ts
 model/problemDetails.ts
 model/user.ts

@@ -3,10 +3,11 @@ import {UserStore} from './user/user.store';
 import {JsonPipe} from '@angular/common';
 import {NavbarComponent} from './nav/navbar.component';
 import {BookmarkStore} from './bookmark/bookmark.store';
-import { User, Bookmark } from '@api/baseproject';
+import {User, Bookmark, Car} from '@api/baseproject';
 import {FormControl, FormGroup, ReactiveFormsModule, Validators} from '@angular/forms';
 import {WrappedFormControls} from './baseproject.types';
-
+import {CarService} from './car/car.service';
+import {firstValueFrom} from 'rxjs';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -16,11 +17,12 @@ import {WrappedFormControls} from './baseproject.types';
     NavbarComponent,
     ReactiveFormsModule,
   ],
-  providers: [UserStore, BookmarkStore]
+  providers: [UserStore, BookmarkStore, CarService],
 })
 export class AppComponent implements OnInit {
   private readonly userStore = inject(UserStore)
   private readonly bookmarkStore  = inject(BookmarkStore)
+  private readonly carService = inject(CarService)
 
   allUsers = this.userStore.allUser
   allBookmarks = this.bookmarkStore.allBookmarks
@@ -41,14 +43,32 @@ export class AppComponent implements OnInit {
   async reloadAll() {
     await this.userStore.getAllUsers()
     await this.bookmarkStore.getAllBookmarks()
+
   }
 
+  async createCar(){
+    const newCar: Car ={
+      id:0,
+      brandName: 'Audi',
+      modelName: 'RS6',
+      power: 600,
+      vmax: 305
+    };
+
+    await firstValueFrom(this.carService.createCar(newCar));
+    // const myCar = await firstValueFrom(this.carService.GetCar(id));
+
+
+
+  }
   async createUser() {
     const newUser: User = {
+      id: 0,
       firstName: 'Max',
       lastName: 'Mustermann',
       eMail: 'max.mustermann@example.com',
-      password: 'Test1234!'
+      password: 'Test1234!',
+      bookmarks: []
     };
 
     await this.userStore.createUser(newUser)
@@ -57,12 +77,14 @@ export class AppComponent implements OnInit {
 
   async createBookmark() {
     const newBookmark: Bookmark = {
+      id: 0,
       name: 'ChatGPT',
       link: 'https://chat.openai.com',
       createdAt: new Date().toISOString(),
       createdBy: 'admin',
       modifiedAt: null,
-      modifiedBy: null
+      modifiedBy: null,
+      users : null
     };
 
     await this.bookmarkStore.createBookmark(newBookmark)

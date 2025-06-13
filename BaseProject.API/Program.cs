@@ -20,6 +20,8 @@ builder.Services.AddScoped<IUserServiceRunner, UserServiceRunner>();
 builder.Services.AddScoped<IBookmarkService, BookmarkService>();
 builder.Services.AddScoped<IBookmarkServiceRunner, BookmarkServiceRunner>();
 
+builder.Services.AddScoped<ICarService, CarService>();
+builder.Services.AddScoped<ICarServiceRunner, CarServiceRunner>();
 
 // Configure the PostgreSQL DbContext
 builder.Services.AddDbContext<BaseProjectDBContext>(options =>

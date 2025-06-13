@@ -56,6 +56,33 @@ namespace BaseProject.Infrastructure.Migrations
                     b.ToTable("Bookmarks");
                 });
 
+            modelBuilder.Entity("BaseProject.Domain.Model.Car", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("BrandName")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("ModelName")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<int>("Power")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("Vmax")
+                        .HasColumnType("integer");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Cars");
+                });
+
             modelBuilder.Entity("BaseProject.Domain.Model.User", b =>
                 {
                     b.Property<int>("Id")
